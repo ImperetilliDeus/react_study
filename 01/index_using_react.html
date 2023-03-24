@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+    // 컴포넌트들은 전부 대문자로 적어준다
+
+    const root = document.querySelector("#root");
+
+    function Title1 (){
+        return(
+            <h3 id="title1" 
+                onMouseEnter={()=>console.log("영역 내 마우스 진입")}>
+                이것은 JSX 문법을 사용하여 만들었습니다.
+            </h3>
+
+        );
+        
+    }
+
+
+    const Btn = ()=>{
+        return(
+            <button id="btn"
+            onClick={()=>console.log("클릭!!")}>
+            클릭해주세요
+            </button>
+
+        ); 
+    }
+
+    // const btn = React.createElement("button",{onClick:()=>console.log("클릭!!")},"눌러주세요!");
+    const Container =   (<div>
+                            <Title1/> 
+                            
+                            <Btn/>
+                        </div>
+                        );
+
+    ReactDOM.render(Container,root);
+
+    // // 괄호 안 ->쌍따옴표 안 -> 생성하고자 하는 html 태그 이름 작성
+    // const root = document.getElementById("root");
+
+    // const title = (<h3 id="title" onMouseEnter={()=> console.log("마우스 들어왔다!!")}>나는 타이틀이다</h3>);
+
+    // // const h3  = React.createElement("h3",{
+    // //     onMouseEnter:()=>console.log("마우스가 영역에 들어왔다!")},"이 방식은 알아두기만 하자");
+    // const button = React.createElement("button",
+    // {onClick : ()=> console.log("버튼 누르셨어요!")},"눌러주세요");
+
+    // const div = React.createElement("div",null,[title,button]);
+    // // 어떤 걸 사용자 화면에 렌더링 할 것인가?, 어디에 렌더할것인가?
+    // ReactDOM.render(div,root);
+</script>
+</html>
