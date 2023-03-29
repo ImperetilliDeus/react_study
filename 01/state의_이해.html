@@ -21,30 +21,26 @@
 <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     const root = document.querySelector("#root");
-    let counter = 0;
+    
 
-    function countUp(){
-        counter=counter+1;
-        render();
+
+    const SetStateStudy = ()=>{
+
+        const [counter,setCounter] = React.useState(0);
+        const countUp=()=>{
+        setCounter(counter+1);
     };
 
-    function render(){
-        ReactDOM.render(<Container/>,root);
-    };
 
-    const Container = ()=>(
-        <div>
+
+    return (<div>
             <span>총 클릭한 횟수 : {counter}</span>
             <br/>
             <br/>
             <button onClick={countUp}>눌러주세요!!</button>
-        </div>
-    );
+        </div>);
 
-        
-        render();
-
-
-    
+    }
+ReactDOM.render(<SetStateStudy/>,root);
 </script>
 </html>
