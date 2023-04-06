@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div id="root">
+
+</div>
+
+</body>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.querySelector("#root");
+
+    const Btn = ({text, ClickBtn, fontSize})=>{
+        console.log(text,"가 렌더되었습니다.")
+        return <button
+                onClick={ClickBtn}
+                style={{
+                    backgroundColor:"crimson",
+                    color:"white",
+                    padding:"10px 20px",
+                    border:0,
+                    borderRadius:10,
+                    fontSize,
+                }}>
+                {text}
+                </button>
+    }
+
+    const MemoBtn = React.memo(Btn);
+    MemoBtn.propTypes = {
+        text:PropTypes.string,
+        fontSize:PropTypes.number,
+        
+    }
+    const App = ()=>{
+
+        const [value,setValue] = React.useState("변경점 확인");
+        const ClickBtn = ()=>{
+            setValue("누르면 변했다");
+        }
+        return(
+            <div>
+                <MemoBtn text={value} ClickBtn={ClickBtn} fontSize={18}/>
+                <MemoBtn text="확인"/>
+            </div>
+
+        );
+        
+        
+    }
+
+    
+ReactDOM.render(<App/>,root);
+</script>
+</html>

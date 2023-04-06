@@ -12,8 +12,6 @@
 
 </div>
 
-
-
 </body>
 
 <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -21,38 +19,62 @@
 <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     const root = document.querySelector("#root");
+    const MinutesToHours = ()=>{
 
+const [amount,setAmount] = React.useState(0);
+const [flipped,setFlipped] = React.useState(false);
+
+const onChange = (e)=>{
+    setAmount(e.target.value);
+}
+
+const reset = ()=>{
+    setAmount(0);
+    
+}
+
+const onFlip = ()=>{
+    setFlipped((current)=>!current);
+    reset();
+};
+
+return(
+    <div>
+        
+        <label htmlFor="minutes" style={{paddingRight: 10}}>분</label>
+        <input id="minutes" disabled={flipped===true} onChange={onChange} value={flipped? amount*60:amount} type="number" placeholder="분"/>
+        
+        <br/>
+        <label htmlFor="hours" style={{paddingRight: 10}}>시간</label>
+        <input id="hours" disabled={flipped===false} onChange={onChange} value={flipped? amount:amount/60} type="number" placeholder="시간"/>
+        <br/>
+        <button onClick={reset}>초기화</button>
+        <button onClick={onFlip}>전환</button>
+    </div>
+)
+}
+    const KmToMile=()=>{
+        <h3>KmToMile</h3>
+    }
     const App = ()=>{
 
-        const [minutes,setMinutes] = React.useState(0);
-        const [flipped,setFlipped] = React.useState(false);
+        const [index,setIndex] = React.useState("0");
 
-        const onChange = (e)=>{
-            setMinutes(e.target.value);
-        }
-
-        const reset = ()=>{
-            setMinutes(0);
+        const onSelect = (e)=>{
             
+                setIndex(e.target.value);
+  
         }
-
-        const onFlip = ()=>{
-            setFlipped((current)=>!current);
-
-        };
 
         return(
             <div>
                 <h1>단위 변환기</h1>
-                <label htmlFor="minutes" style={{paddingRight: 10}}>분</label>
-                <input id="minutes" disabled={flipped===true} onChange={onChange} value={minutes} type="number" placeholder="분"/>
-                <h4>{minutes} 분을 시 단위로 변환합니다</h4>
-                <br/>
-                <label htmlFor="hours" style={{paddingRight: 10}}>시간</label>
-                <input id="hours" disabled={flipped===false} value={minutes/60} type="number" placeholder="시간"/>
-                <br/>
-                <button onClick={reset}>초기화</button>
-                <button onClick={onFlip}>전환</button>
+                <select value={index} onChange={onSelect}>
+                    <option value="0">시 / 분 변환</option>
+                    <option value="1">킬로미터 / 마일 변환</option>
+                </select>
+                {index==="0" ? <MinutesToHours/>:null}
+                {index==="1" ? <KmToMile/>:null}
             </div>
         )
     }
